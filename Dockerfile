@@ -11,7 +11,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
     echo "deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free" >>/etc/apt/sources.list && \
     echo "deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free" >>/etc/apt/sources.list
 
-
 # 安装必要套件
 RUN apt-get update -y && \
     apt-get upgrade -y && \
@@ -20,17 +19,30 @@ RUN apt-get update -y && \
     git \
     nodejs \
     libpq-dev \
-    cron \
     libxrender1 \
     libfontconfig \
     libxext-dev \
-    locales \
+    ttf-wqy-zenhei \
+    libjpeg62 \
     postgresql-client && \
     rm -rf /var/lib/apt/lists/*
+    # locales \
+    # cron \
 
-RUN localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
+# 中文字变方框的情况证实使用ttf-wqy-zenhei是有效的
 
-ENV LANG zh_CN.utf8
+# 一些字体 ttf-wqy-zenhei ttf-wqy-microhei ttf-arphic-ukai \
+# 网上看到的ttf-arphic-uming和ttf-arphic-ukai都无法安装
+# ttf-wqy-microhei无法证实有效
+# ttf-mscorefonts-installer是想安装一些像arial的英文字体 但是也无法证实有效 相较于centos的行间距仍然比较小
+
+# gem:wkhtmltopdf-binary 0.12.5.4版本需要新安装libjpeg62-dev
+
+
+# RUN localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
+
+# ENV LANG zh_CN.utf8
+ENV LANG C.UTF-8
 
 #定义变量
 ENV HOME /app
