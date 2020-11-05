@@ -24,6 +24,7 @@ RUN apt-get update -y && \
     libxext-dev \
     ttf-wqy-zenhei \
     libjpeg62 \
+    curl \
     postgresql-client && \
     rm -rf /var/lib/apt/lists/*
     # locales \
