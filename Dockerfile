@@ -55,4 +55,4 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime && \
     chmod -R 755 $HOME/tmp && \
     echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 
-CMD echo "Hello ruby deploy test"
+CMD echo "Hello ruby deploy test1"
